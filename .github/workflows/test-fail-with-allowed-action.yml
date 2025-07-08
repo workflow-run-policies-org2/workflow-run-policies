@@ -1,0 +1,29 @@
+name: Test Fail with Internal Action
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-fail-internal:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use disallowed internal action (should be blocked)
+        uses: step-integration-tests/disallowed-internal-action@main
+        with:
+          test-input: "policy-enforcement-test"
+
+      - name: Display results
+        run: |
+          echo "Workflow completed successfully"
+          echo "This is a fail scenario for internal action policies"
