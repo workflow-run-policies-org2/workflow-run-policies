@@ -1,0 +1,48 @@
+name: Test Fail with macOS Policy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-fail-macos:
+    runs-on: macos-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Test on disallowed runner
+        run: |
+          echo "Running on macos-latest (should be blocked)"
+          echo "This workflow uses disallowed runner labels"
+
+      - name: Display results
+        run: |
+          echo "Workflow completed successfully"
+          echo "This is a fail scenario for runs-on policy enforcement"
+
+  test-fail-macos-13:
+    runs-on: macos-13
+    permissions:
+      contents: read
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Test on macOS 13 runner
+        run: |
+          echo "Running on macos-13 (should be blocked)"
+          echo "This workflow uses macOS 13 runner labels"
