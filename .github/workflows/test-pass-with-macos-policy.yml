@@ -1,10 +1,10 @@
-name: Test Fail with macOS Policy
+name: Test Pass with macOS Policy
 
 on:
   workflow_dispatch:
 
 jobs:
-  test-fail-macos:
+  test-pass-macos:
     runs-on: macos-latest
     permissions:
       contents: read
@@ -26,9 +26,9 @@ jobs:
       - name: Display results
         run: |
           echo "Workflow completed successfully"
-          echo "This is a fail scenario for runs-on policy enforcement"
+          echo "This is a pass scenario for runs-on policy enforcement"
 
-  test-fail-macos-13:
+  test-pass-macos-13:
     runs-on: macos-13
     permissions:
       contents: read
