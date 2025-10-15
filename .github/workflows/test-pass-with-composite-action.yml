@@ -1,5 +1,7 @@
 name: Test Pass with Composite Action
-
+# This org is not currently in allowed list for composite action evaluation
+# which is why this action is not cancelled even though step-security/action-slack-notify@v2
+# uses an action which is not in the allowed list
 on:
   workflow_dispatch:
 
