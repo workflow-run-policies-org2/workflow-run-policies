@@ -1,0 +1,21 @@
+name: Test Pass with Composite Action
+
+on:
+  workflow_dispatch:
+
+jobs:
+  use-composite-action:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+          
+      - uses: actions/checkout@v5
+      # This action is a composite action that uses another step-security action
+      - name: Run action-slack-notify
+        uses: step-security/action-slack-notify@v2
