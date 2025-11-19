@@ -27,22 +27,3 @@ jobs:
         run: |
           echo "Workflow completed successfully"
           echo "This is a pass scenario for runs-on policy enforcement"
-
-  test-pass-macos-13:
-    runs-on: macos-13
-    permissions:
-      contents: read
-
-    steps:
-      - name: Harden Runner
-        uses: step-security/harden-runner@v2
-        with:
-          egress-policy: audit
-
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Test on macOS 13 runner
-        run: |
-          echo "Running on macos-13 (should be blocked)"
-          echo "This workflow uses macOS 13 runner labels"
